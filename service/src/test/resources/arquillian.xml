@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<arquillian xmlns="http://jboss.org/schema/arquillian" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+  <container qualifier="arquillian-wildfly-remote" default="true">
+    <configuration>
+      <property name="chameleonTarget">${chameleon.target}</property>
+      <!--<property name="managementAddress">127.0.0.1</property>-->
+      <!--<property name="managementPort">THE_PORT_IF_NOT_9990</property>-->
+      <!--<property name="username">${jboss.management.username}</property>-->
+      <!--<property name="password">${jboss.management.password}</property>-->
+    </configuration>
+  </container>
+  <container qualifier="arquillian-wildfly-managed">
+    <configuration>
+      <property name="chameleonTarget">${chameleon.target}</property>
+      <property name="serverConfig">standalone-full.xml</property>
+      <property name="javaVmArguments">-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</property>
+      <!--
+      If you want Arquillian to use an existing installation of JBoss EAP uncomment the line below
+      and make sure you define the variable JBOSS_HOME with the path to the root folder of the existing
+      installation
+      -->
+      <!--<property name="jbossHome">${JBOSS_HOME}</property>-->
+    </configuration>
+  </container>
+</arquillian>

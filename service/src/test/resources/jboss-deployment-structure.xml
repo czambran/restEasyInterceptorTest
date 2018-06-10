@@ -1,0 +1,20 @@
+<jboss-deployment-structure>
+  <deployment>
+    <dependencies>
+      <!--
+        Jackson libraries are required to make JAX-RS work correctly with our custom 
+        ObjectMapper @Provider instances. We've explicitly omitted them from
+        the war, so we use exactly the same classes from the JBoss class loader.
+      -->
+      <!--<module name="org.codehaus.jackson.jackson-jaxrs" />
+      <module name="org.codehaus.jackson.jackson-core-asl" />
+      <module name="org.codehaus.jackson.jackson-mapper-asl" />
+-->
+      <!-- Required to get mp-rest-client working. It uses apache httpclient. -->
+      <module name="org.apache.httpcomponents" />
+
+      <!--&lt;!&ndash; Required for remote JMS brokers &ndash;&gt;-->
+      <!--<module name="org.hornetq" slot="main"/>-->
+    </dependencies>
+  </deployment>
+</jboss-deployment-structure>

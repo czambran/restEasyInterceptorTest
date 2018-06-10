@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+ 
+	<groupId>com.czambran</groupId>
+	<artifactId>resteasy-interceptor-test</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+
+	<name>Example of RestEasy Interceptor not being picked up with CDI</name>
+
+	<modules>
+		<module>interceptor</module>
+		<module>service</module>
+	</modules>
+
+	<properties>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mp-rest-client.version>2.1.6-SNAPSHOT</mp-rest-client.version>
+
+
+		<!-- Arquillian-related Versions -->
+		<container.type>managed</container.type> <!--Should be either remote or managed-->
+		<version.arquillian_universe>1.1.13.0</version.arquillian_universe>
+		<version.junit>4.12</version.junit>
+		<mockito-core.version>1.10.19</mockito-core.version>
+		<maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
+		<jacoco.version>0.7.8</jacoco.version>
+		<arquillian_jacoco.version>1.0.0.Alpha9</arquillian_jacoco.version>
+
+		<jboss.eap.version>6.4.18</jboss.eap.version>
+		<!-- Define the version of the JBoss BOMs we want to import to specify tested stacks. -->
+		<version.jboss.bom.eap>${jboss.eap.version}.GA</version.jboss.bom.eap>
+		<!-- Make sure the following is set with the same value as the one found in jboss-eap-bom-parent -->
+		<version.org.jboss.spec.jboss.javaee.6.0>3.0.2.Final-redhat-15</version.org.jboss.spec.jboss.javaee.6.0>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.bom.eap</groupId>
+				<artifactId>jboss-javaee-6.0-with-logging</artifactId>
+				<version>${version.jboss.bom.eap}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<!-- Use instead of org.jboss.bom.eap:jboss-javaee-6.0-with-tools because that one
+            has really old versions of Arquillian packages -->
+			<dependency>
+				<groupId>org.arquillian</groupId>
+				<artifactId>arquillian-universe</artifactId>
+				<version>${version.arquillian_universe}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- This is just to make it easy to see the Java EE Spec being used -->
+			<dependency>
+				<groupId>org.jboss.spec</groupId>
+				<artifactId>jboss-javaee-6.0</artifactId>
+				<version>${version.org.jboss.spec.jboss.javaee.6.0}</version>
+				<type>pom</type>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.bom</groupId>
+				<artifactId>eap6-supported-artifacts</artifactId>
+				<version>${version.jboss.bom.eap}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>
